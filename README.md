@@ -29,6 +29,8 @@
 
 ## Usage
 
+You can also check demo project in [AERecord](https://github.com/tadija/AERecord).
+
 ### CoreDataTableViewController
 `CoreDataTableViewController` mostly just copies the code from `NSFetchedResultsController`
 documentation page into a subclass of `UITableViewController`.

@@ -23,6 +23,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 FOUNDATION_EXPORT double AECoreDataUIVersionNumber;
 FOUNDATION_EXPORT const unsigned char AECoreDataUIVersionString[];
