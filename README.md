@@ -50,7 +50,7 @@ class MyTableViewController: CoreDataTableViewController {
 
 	override func viewDidLoad() {
 	    super.viewDidLoad()
-	    
+	    tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 	    refreshData()
 	}
 
