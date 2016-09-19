@@ -270,10 +270,10 @@ open class CoreDataTableViewController: UITableViewController, NSFetchedResultsC
     If you want new fetch parameters (predicate, sorting, etc.),
     create a **NEW** `NSFetchedResultsController` and set this class's `fetchedResultsController` property again.
 */
-open class CoreDataCollectionViewController<T: NSFetchRequestResult>: UICollectionViewController, NSFetchedResultsControllerDelegate {
+open class CoreDataCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
     
     /// The controller *(this class fetches nothing if this is not set)*.
-    open var fetchedResultsController: NSFetchedResultsController<T>? {
+    open var fetchedResultsController: NSFetchedResultsController<NSManagedObject>? {
         didSet {
             if let frc = fetchedResultsController {
                 if frc != oldValue {
