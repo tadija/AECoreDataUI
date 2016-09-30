@@ -182,6 +182,7 @@ public class CoreDataTableViewController: UITableViewController, NSFetchedResult
     public func controllerDidChangeContent(controller: NSFetchedResultsController) {
         if beganUpdates {
             tableView.endUpdates()
+            beganUpdates = false
         }
     }
     
