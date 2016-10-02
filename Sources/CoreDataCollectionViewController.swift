@@ -236,9 +236,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
     // MARK: - UICollectionViewDataSource
     
     override open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        let superNumberOfSections = super.numberOfSections(in: collectionView)
-        guard let frc = fetchedResultsController else { return superNumberOfSections }
-        return frc.sections?.count ?? superNumberOfSections
+        return fetchedResultsController?.sections?.count ?? 1
     }
 
     override open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
