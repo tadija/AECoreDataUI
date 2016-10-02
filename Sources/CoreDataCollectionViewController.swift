@@ -28,18 +28,20 @@ import UIKit
 /**
     Same concept as `CoreDataTableViewController`, but modified for use with `UICollectionViewController`.
 
-    This class mostly just copies the code from `NSFetchedResultsController` documentation page
-    into a subclass of `UICollectionViewController`.
+    This class mostly just copies the code from `NSFetchedResultsController` 
+    documentation page into a subclass of `UICollectionViewController`.
 
     Just subclass this and set the `fetchedResultsController`.
-    The only `UICollectionViewDataSource` method you'll **HAVE** to implement is `collectionView:cellForItemAtIndexPath:`.
+    The only `UICollectionViewDataSource` method you'll have to implement is `collectionView:cellForItemAtIndexPath:`.
     And you can use the `NSFetchedResultsController` method `objectAtIndexPath:` to do it.
 
-    Remember that once you create an `NSFetchedResultsController`, you **CANNOT** modify its properties.
+    Remember that once you create an `NSFetchedResultsController`, you cannot modify its properties.
     If you want new fetch parameters (predicate, sorting, etc.),
-    create a **NEW** `NSFetchedResultsController` and set this class's `fetchedResultsController` property again.
+    create a new `NSFetchedResultsController` and set this class's `fetchedResultsController` property again.
 */
 open class CoreDataCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
+    
+    // MARK: - Properties
     
     /// The controller *(this class fetches nothing if this is not set)*.
     open var fetchedResultsController: NSFetchedResultsController<NSManagedObject>? {
@@ -50,7 +52,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
                     do {
                         try performFetch()
                     } catch {
-                        print(error)
+                        debugPrint(error)
                     }
                 }
             } else {
@@ -59,28 +61,6 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         }
     }
     
-    /**
-        Causes the `fetchedResultsController` to refetch the data.
-        You almost certainly never need to call this.
-        The `NSFetchedResultsController` class observes the context
-        (so if the objects in the context change, you do not need to call `performFetch`
-        since the `NSFetchedResultsController` will notice and update the collection view automatically).
-        This will also automatically be called if you change the `fetchedResultsController` property.
-    */
-    open func performFetch() throws {
-        if let frc = fetchedResultsController {
-            defer {
-                collectionView?.reloadData()
-            }
-            do {
-                try frc.performFetch()
-            } catch {
-                throw error
-            }
-        }
-    }
-    
-    fileprivate var _suspendAutomaticTrackingOfChangesInManagedObjectContext: Bool = false
     /**
         Turn this on before making any changes in the managed object context that
         are a one-for-one result of the user manipulating cells directly in the collection view.
@@ -91,7 +71,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         Turn this back off after the user has finished the change.
         Note that the effect of setting this to NO actually gets delayed slightly
         so as to ignore previously-posted, but not-yet-processed context-changed notifications,
-        therefore it is fine to set this to YES at the beginning of, e.g., `collectionView:moveItemAtIndexPath:toIndexPath:`,
+        therefore it is fine to set this to YES at the beginning of `collectionView:moveItemAtIndexPath:toIndexPath:`,
         and then set it back to NO at the end of your implementation of that method.
         It is not necessary (in fact, not desirable) to set this during row deletion or insertion
         (but definitely for cell moves).
@@ -111,73 +91,107 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         }
     }
     
-    // MARK: NSFetchedResultsControllerDelegate Helpers
+    fileprivate var _suspendAutomaticTrackingOfChangesInManagedObjectContext: Bool = false
     
-    fileprivate var sectionInserts = [Int]()
-    fileprivate var sectionDeletes = [Int]()
-    fileprivate var sectionUpdates = [Int]()
+    // MARK: - API
     
-    fileprivate var objectInserts = [IndexPath]()
-    fileprivate var objectDeletes = [IndexPath]()
-    fileprivate var objectUpdates = [IndexPath]()
-    fileprivate var objectMoves = [IndexPath]()
-    fileprivate var objectReloads = Set<IndexPath>()
-    
-    fileprivate func updateSectionsAndObjects() {
-        // sections
-        if !self.sectionInserts.isEmpty {
-            for sectionIndex in self.sectionInserts {
-                self.collectionView?.insertSections(IndexSet(integer: sectionIndex))
-            }
-            self.sectionInserts.removeAll(keepingCapacity: true)
+    /**
+        Causes the `fetchedResultsController` to refetch the data.
+        You almost certainly never need to call this.
+        The `NSFetchedResultsController` class observes the context
+        (so if the objects in the context change, you do not need to call `performFetch`
+        since the `NSFetchedResultsController` will notice and update the collection view automatically).
+        This will also automatically be called if you change the `fetchedResultsController` property.
+    */
+    open func performFetch() throws {
+        guard let frc = fetchedResultsController else { return }
+        
+        defer {
+            collectionView?.reloadData()
         }
-        if !self.sectionDeletes.isEmpty {
-            for sectionIndex in self.sectionDeletes {
-                self.collectionView?.deleteSections(IndexSet(integer: sectionIndex))
-            }
-            self.sectionDeletes.removeAll(keepingCapacity: true)
-        }
-        if !self.sectionUpdates.isEmpty {
-            for sectionIndex in self.sectionUpdates {
-                self.collectionView?.reloadSections(IndexSet(integer: sectionIndex))
-            }
-            self.sectionUpdates.removeAll(keepingCapacity: true)
-        }
-        // objects
-        if !self.objectInserts.isEmpty {
-            self.collectionView?.insertItems(at: self.objectInserts)
-            self.objectInserts.removeAll(keepingCapacity: true)
-        }
-        if !self.objectDeletes.isEmpty {
-            self.collectionView?.deleteItems(at: self.objectDeletes)
-            self.objectDeletes.removeAll(keepingCapacity: true)
-        }
-        if !self.objectUpdates.isEmpty {
-            self.collectionView?.reloadItems(at: self.objectUpdates)
-            self.objectUpdates.removeAll(keepingCapacity: true)
-        }
-        if !self.objectMoves.isEmpty {
-            let moveOperations = objectMoves.count / 2
-            var index = 0
-            for _ in 0 ..< moveOperations {
-                self.collectionView?.moveItem(at: self.objectMoves[index], to: self.objectMoves[index + 1])
-                index = index + 2
-            }
-            self.objectMoves.removeAll(keepingCapacity: true)
+        
+        do {
+            try frc.performFetch()
+        } catch {
+            throw error
         }
     }
     
-    // MARK: NSFetchedResultsControllerDelegate
+    // MARK: - Helpers
     
-    /**
-        Notifies the receiver of the addition or removal of a section.
-
-        :param: controller The fetched results controller that sent the message.
-        :param: sectionInfo The section that changed.
-        :param: sectionIndex The index of the changed section.
-        :param: type The type of change (insert or delete).
-    */
-    open func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+    private func updateSectionsAndObjects() {
+        updateSections()
+        updateObjects()
+    }
+    
+    private var sectionInserts = [Int]()
+    private var sectionDeletes = [Int]()
+    private var sectionUpdates = [Int]()
+    
+    private func updateSections() {
+        if !sectionInserts.isEmpty {
+            for sectionIndex in sectionInserts {
+                collectionView?.insertSections(IndexSet(integer: sectionIndex))
+            }
+            sectionInserts.removeAll(keepingCapacity: true)
+        }
+        if !sectionDeletes.isEmpty {
+            for sectionIndex in sectionDeletes {
+                collectionView?.deleteSections(IndexSet(integer: sectionIndex))
+            }
+            sectionDeletes.removeAll(keepingCapacity: true)
+        }
+        if !sectionUpdates.isEmpty {
+            for sectionIndex in sectionUpdates {
+                collectionView?.reloadSections(IndexSet(integer: sectionIndex))
+            }
+            sectionUpdates.removeAll(keepingCapacity: true)
+        }
+    }
+    
+    private var objectInserts = [IndexPath]()
+    private var objectDeletes = [IndexPath]()
+    private var objectUpdates = [IndexPath]()
+    private var objectMoves = [IndexPath]()
+    private var objectReloads = Set<IndexPath>()
+    
+    private func updateObjects() {
+        if !objectInserts.isEmpty {
+            collectionView?.insertItems(at: objectInserts)
+            objectInserts.removeAll(keepingCapacity: true)
+        }
+        if !objectDeletes.isEmpty {
+            collectionView?.deleteItems(at: objectDeletes)
+            objectDeletes.removeAll(keepingCapacity: true)
+        }
+        if !objectUpdates.isEmpty {
+            collectionView?.reloadItems(at: objectUpdates)
+            objectUpdates.removeAll(keepingCapacity: true)
+        }
+        if !objectMoves.isEmpty {
+            let moveOperations = objectMoves.count / 2
+            var index = 0
+            for _ in 0 ..< moveOperations {
+                collectionView?.moveItem(at: objectMoves[index], to: objectMoves[index + 1])
+                index = index + 2
+            }
+            objectMoves.removeAll(keepingCapacity: true)
+        }
+    }
+    
+    private func reloadObjects() {
+        if objectReloads.count > 0 {
+            collectionView?.reloadItems(at: Array(objectReloads))
+            objectReloads.removeAll()
+        }
+    }
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    open func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                         didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int,
+                         for type: NSFetchedResultsChangeType) {
+        
         switch type {
         case .insert:
             sectionInserts.append(sectionIndex)
@@ -189,17 +203,11 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
             break
         }
     }
-    
-    /**
-        Notifies the receiver that a fetched object has been changed due to an add, remove, move, or update.
 
-        :param: controller The fetched results controller that sent the message.
-        :param: anObject The object in controller’s fetched results that changed.
-        :param: indexPath The index path of the changed object (this value is nil for insertions).
-        :param: type The type of change.
-        :param: newIndexPath The destination path for the object for insertions or moves (this value is nil for a deletion).
-    */
-    open func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    open func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                         didChange anObject: Any, at indexPath: IndexPath?,
+                         for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
         switch type {
         case .insert:
             objectInserts.append(newIndexPath!)
@@ -214,51 +222,29 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
             objectReloads.insert(newIndexPath!)
         }
     }
-    
-    /**
-        Notifies the receiver that the fetched results controller has completed processing of one or more changes due to an add, remove, move, or update.
 
-        :param: controller The fetched results controller that sent the message.
-    */
     open func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if !suspendAutomaticTrackingOfChangesInManagedObjectContext {
-            // do batch updates on collection view
             collectionView?.performBatchUpdates({ () -> Void in
                 self.updateSectionsAndObjects()
-                }, completion: { (finished) -> Void in
-                    // reload moved items when finished
-                    if self.objectReloads.count > 0 {
-                        self.collectionView?.reloadItems(at: Array(self.objectReloads))
-                        self.objectReloads.removeAll()
-                    }
+            }, completion: { (finished) -> Void in
+                self.reloadObjects()
             })
         }
     }
     
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     
-    /**
-        Asks the data source for the number of sections in the collection view.
-
-        :param: collectionView An object representing the collection view requesting this information.
-
-        :returns: The number of sections in collectionView.
-    */
     override open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchedResultsController?.sections?.count ?? 1
+        let superNumberOfSections = super.numberOfSections(in: collectionView)
+        guard let frc = fetchedResultsController else { return superNumberOfSections }
+        return frc.sections?.count ?? superNumberOfSections
     }
-    
-    /**
-        Asks the data source for the number of items in the specified section. (required)
 
-        :param: collectionView An object representing the collection view requesting this information.
-        :param: section An index number identifying a section in collectionView.
-
-        :returns: The number of rows in section.
-    */
     override open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let superNumberOfItems = super.collectionView(collectionView, numberOfItemsInSection: section)
-        return (fetchedResultsController?.sections?[section])?.numberOfObjects ?? superNumberOfItems
+        guard let frc = fetchedResultsController else { return superNumberOfItems }
+        return (frc.sections?[section])?.numberOfObjects ?? superNumberOfItems
     }
     
 }
