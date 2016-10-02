@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B250A701DA178CC007FA098 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B250A6F1DA178CC007FA098 /* CoreDataCollectionViewController.swift */; };
 		8BFD96E61CF073F8008E8C9E /* AECoreDataUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BFD96E51CF073F8008E8C9E /* AECoreDataUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BFD96ED1CF073F8008E8C9E /* AECoreDataUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BFD96E21CF073F8008E8C9E /* AECoreDataUI.framework */; };
 		8BFD96F21CF073F8008E8C9E /* AECoreDataUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFD96F11CF073F8008E8C9E /* AECoreDataUITests.swift */; };
-		8BFD96FD1CF07405008E8C9E /* AECoreDataUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFD96FC1CF07405008E8C9E /* AECoreDataUI.swift */; };
+		8BFD96FD1CF07405008E8C9E /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFD96FC1CF07405008E8C9E /* CoreDataTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,13 +25,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B250A6F1DA178CC007FA098 /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; };
 		8BFD96E21CF073F8008E8C9E /* AECoreDataUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AECoreDataUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFD96E51CF073F8008E8C9E /* AECoreDataUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AECoreDataUI.h; sourceTree = "<group>"; };
 		8BFD96E71CF073F8008E8C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BFD96EC1CF073F8008E8C9E /* AECoreDataUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AECoreDataUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFD96F11CF073F8008E8C9E /* AECoreDataUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AECoreDataUITests.swift; sourceTree = "<group>"; };
 		8BFD96F31CF073F8008E8C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8BFD96FC1CF07405008E8C9E /* AECoreDataUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AECoreDataUI.swift; sourceTree = "<group>"; };
+		8BFD96FC1CF07405008E8C9E /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		8BFD97001CF074B4008E8C9E /* AECoreDataUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AECoreDataUI.podspec; sourceTree = "<group>"; };
 		8BFD97011CF074B4008E8C9E /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		8BFD97021CF074B4008E8C9E /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -79,7 +81,8 @@
 		8BFD96E41CF073F8008E8C9E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8BFD96FC1CF07405008E8C9E /* AECoreDataUI.swift */,
+				8BFD96FC1CF07405008E8C9E /* CoreDataTableViewController.swift */,
+				8B250A6F1DA178CC007FA098 /* CoreDataCollectionViewController.swift */,
 				8BFD96FE1CF07455008E8C9E /* Supporting Files */,
 			);
 			path = Sources;
@@ -180,14 +183,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = AE;
 				TargetAttributes = {
 					8BFD96E11CF073F8008E8C9E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					8BFD96EB1CF073F8008E8C9E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -231,7 +236,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BFD96FD1CF07405008E8C9E /* AECoreDataUI.swift in Sources */,
+				8BFD96FD1CF07405008E8C9E /* CoreDataTableViewController.swift in Sources */,
+				8B250A701DA178CC007FA098 /* CoreDataCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,8 +274,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -317,8 +325,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -338,6 +348,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -350,6 +361,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -361,6 +373,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -369,6 +382,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -379,6 +393,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AECoreDataUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -389,6 +404,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AECoreDataUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -399,6 +415,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AECoreDataUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -421,6 +438,7 @@
 				8BFD96F81CF073F8008E8C9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8BFD96F91CF073F8008E8C9E /* Build configuration list for PBXNativeTarget "AECoreDataUITests" */ = {
 			isa = XCConfigurationList;
@@ -429,6 +447,7 @@
 				8BFD96FB1CF073F8008E8C9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
