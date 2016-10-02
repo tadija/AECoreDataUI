@@ -185,6 +185,7 @@ open class CoreDataTableViewController: UITableViewController, NSFetchedResultsC
     open func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if beganUpdates {
             tableView.endUpdates()
+            beganUpdates = false
         }
     }
     
