@@ -28,7 +28,7 @@ import UIKit
 /**
     Same concept as `CoreDataTableViewController`, but modified for use with `UICollectionViewController`.
 
-    This class mostly just copies the code from `NSFetchedResultsController` 
+    This class mostly just copies the code from `NSFetchedResultsController`
     documentation page into a subclass of `UICollectionViewController`.
 
     Just subclass this and set the `fetchedResultsController`.
@@ -152,8 +152,6 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
     private var objectInserts = [IndexPath]()
     private var objectDeletes = [IndexPath]()
     private var objectUpdates = [IndexPath]()
-    private var objectMoves = [IndexPath]()
-    private var objectReloads = Set<IndexPath>()
     
     private func updateObjects() {
         if !objectInserts.isEmpty {
@@ -167,22 +165,6 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         if !objectUpdates.isEmpty {
             collectionView?.reloadItems(at: objectUpdates)
             objectUpdates.removeAll(keepingCapacity: true)
-        }
-        if !objectMoves.isEmpty {
-            let moveOperations = objectMoves.count / 2
-            var index = 0
-            for _ in 0 ..< moveOperations {
-                collectionView?.moveItem(at: objectMoves[index], to: objectMoves[index + 1])
-                index = index + 2
-            }
-            objectMoves.removeAll(keepingCapacity: true)
-        }
-    }
-    
-    private func reloadObjects() {
-        if objectReloads.count > 0 {
-            collectionView?.reloadItems(at: Array(objectReloads))
-            objectReloads.removeAll()
         }
     }
     
@@ -214,22 +196,30 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         case .delete:
             objectDeletes.append(indexPath!)
         case .update:
-            objectUpdates.append(indexPath!)
+            /// - Note: iOS 10 sometimes reports `.update` instead of `.move` (`indexPath != newIndexPath`)
+            /// also, iOS 9 sometimes reports `newIndexPath = nil`, so this logic is here to avoid crashes.
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                if indexPath == newIndexPath {
+                    objectUpdates.append(indexPath)
+                } else {
+                    objectInserts.append(newIndexPath)
+                    objectDeletes.append(indexPath)
+                }
+            } else {
+                objectUpdates.append(indexPath!)
+            }
         case .move:
-            objectMoves.append(indexPath!)
-            objectMoves.append(newIndexPath!)
-            objectReloads.insert(indexPath!)
-            objectReloads.insert(newIndexPath!)
+            /// - Note: previous logic for `.move` is replaced with this one in order to avoid crashes on iOS 10.
+            objectInserts.append(newIndexPath!)
+            objectDeletes.append(indexPath!)
         }
     }
 
     open func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if !suspendAutomaticTrackingOfChangesInManagedObjectContext {
-            collectionView?.performBatchUpdates({ () -> Void in
+            collectionView?.performBatchUpdates({ 
                 self.updateSectionsAndObjects()
-            }, completion: { (finished) -> Void in
-                self.reloadObjects()
-            })
+            }, completion: nil)
         }
     }
     
