@@ -151,16 +151,34 @@ open class CoreDataTableViewController: UITableViewController, NSFetchedResultsC
         if !suspendAutomaticTrackingOfChangesInManagedObjectContext {
             switch type {
             case .insert:
-                tableView.insertRows(at: [newIndexPath!], with: .fade)
+                guard let nip = newIndexPath else { break }
+                if indexPath == nil { /// - Note: Bug fix for iOS 8.4, `indexPath` must be nil for `.insert`.
+                    tableView.insertRows(at: [nip], with: .automatic)
+                }
             case .delete:
-                tableView.deleteRows(at: [indexPath!], with: .fade)
+                guard let ip = indexPath else { break }
+                tableView.deleteRows(at: [ip], with: .automatic)
             case .update:
-                tableView.reloadRows(at: [indexPath!], with: .fade)
+                if let ip = indexPath, let nip = newIndexPath {
+                    if ip == nip {
+                        tableView.reloadRows(at: [ip], with: .none)
+                    } else {
+                        /// - Note: Bug fix for iOS 10 (`.update` instead of `.move` -> `indexPath != newIndexPath`)
+                        tableView.deleteRows(at: [ip], with: .automatic)
+                        tableView.insertRows(at: [nip], with: .automatic)
+                    }
+                } else {
+                    tableView.reloadRows(at: [indexPath!], with: .none)
+                }
             case .move:
-            // TODO: fix bug when moving rows in iOS 8.3 and 8.4 - Xcode 7.0 (7A220)
-            // SEE: http://stackoverflow.com/questions/31383760/ios-9-attempt-to-delete-and-reload-the-same-index-path
-                tableView.deleteRows(at: [indexPath!], with: .fade)
-                tableView.insertRows(at: [newIndexPath!], with: .fade)
+                guard
+                    let ip = indexPath,
+                    let nip = newIndexPath,
+                    ip != nip /// - Note: Bug fix for iOS 9
+                    else { break }
+                /// - Note: The real `.move` logic is replaced with delete/insert to avoid crashes on iOS 8/9/10.
+                tableView.deleteRows(at: [ip], with: .automatic)
+                tableView.insertRows(at: [nip], with: .automatic)
             }
         }
     }

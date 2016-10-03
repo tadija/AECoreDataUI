@@ -192,26 +192,34 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         
         switch type {
         case .insert:
-            objectInserts.append(newIndexPath!)
+            guard let nip = newIndexPath else { break }
+            if indexPath == nil { /// - Note: Bug fix for iOS 8.4, `indexPath` must be nil for `.insert`.
+                objectInserts.append(nip)
+            }
         case .delete:
-            objectDeletes.append(indexPath!)
+            guard let ip = indexPath else { break }
+            objectDeletes.append(ip)
         case .update:
-            /// - Note: iOS 10 sometimes reports `.update` instead of `.move` (`indexPath != newIndexPath`)
-            /// also, iOS 9 sometimes reports `newIndexPath = nil`, so this logic is here to avoid crashes.
-            if let indexPath = indexPath, let newIndexPath = newIndexPath {
-                if indexPath == newIndexPath {
-                    objectUpdates.append(indexPath)
+            if let ip = indexPath, let nip = newIndexPath {
+                if ip == nip {
+                    objectUpdates.append(ip)
                 } else {
-                    objectInserts.append(newIndexPath)
-                    objectDeletes.append(indexPath)
+                    /// - Note: Bug fix for iOS 10 (`.update` instead of `.move` -> `indexPath != newIndexPath`)
+                    objectDeletes.append(ip)
+                    objectInserts.append(nip)
                 }
             } else {
                 objectUpdates.append(indexPath!)
             }
         case .move:
-            /// - Note: previous logic for `.move` is replaced with this one in order to avoid crashes on iOS 10.
-            objectInserts.append(newIndexPath!)
-            objectDeletes.append(indexPath!)
+            guard
+                let ip = indexPath,
+                let nip = newIndexPath,
+                ip != nip /// - Note: Bug fix for iOS 9
+                else { break }
+            /// - Note: The real `.move` logic is replaced with delete/insert to avoid crashes on iOS 8/9/10.
+            objectDeletes.append(ip)
+            objectInserts.append(nip)
         }
     }
 
