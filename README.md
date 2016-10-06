@@ -31,7 +31,7 @@ is so great at it, that I've written it in Swift and made `CoreDataCollectionVie
 
 ## Usage
 
-You may check demo project in [AERecord](https://github.com/tadija/AERecord) for example.
+You may check [this demo project](https://github.com/tadija/AECoreDataDemo) for example.
 
 ### CoreDataTableViewController
 `CoreDataTableViewController` mostly just copies the code from `NSFetchedResultsController`
