@@ -39,6 +39,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
                 }
             } else {
                 collectionView?.reloadData()
+                collectionView?.collectionViewLayout.invalidateLayout()
             }
         }
     }
