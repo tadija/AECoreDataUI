@@ -1,29 +1,32 @@
+[![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://swift.org)
+[![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com)
+[![CocoaPods](https://img.shields.io/cocoapods/v/AECoreDataUI.svg?style=flat)](https://cocoapods.org/pods/AECoreDataUI)
+[![Carthage](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![License MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](https://github.com/tadija/AECoreDataUI/blob/master/LICENSE)
+
 # AECoreDataUI
 **Super awesome Core Data driven UI for iOS written in Swift**
 
-[![Language Swift 3.0](https://img.shields.io/badge/Language-Swift%203.0-orange.svg?style=flat)](https://swift.org)
-[![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com)
-[![License MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](https://github.com/tadija/AECoreDataUI/blob/master/LICENSE)
-
-[![CocoaPods Version](https://img.shields.io/cocoapods/v/AECoreDataUI.svg?style=flat)](https://cocoapods.org/pods/AECoreDataUI)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-
-**AECoreDataUI** was previously part of [AERecord](https://github.com/tadija/AERecord), 
-so you may want to check that also.
-
->When it comes to connecting data with the UI, the best approach is to use `NSFetchedResultsController`.
-`CoreDataTableViewController` wrapper from [Stanford's CS193p](http://www.stanford.edu/class/cs193p/cgi-bin/drupal/downloads-2013-winter) 
-is so great at it, that I've written it in Swift and made `CoreDataCollectionViewController` too in the same fashion.  
+> I made this for personal use, but feel free to use it or contribute.
+> For more examples check out [Sources](Sources) and [Tests](Tests).
 
 ## Index
+- [Intro](#intro)
 - [Features](#features)
 - [Usage](#usage)
     - [CoreDataTableViewController](#coredatatableviewcontroller)
     - [CoreDataCollectionViewController](#coredatacollectionviewcontroller)
-- [Requirements](#requirements)
 - [Installation](#installation)
 - [License](#license)
+
+## Intro
+
+**AECoreDataUI** was previously part of [AERecord](https://github.com/tadija/AERecord), 
+so you may want to check that also.
+
+When it comes to connecting data with the UI, nice approach is to use `NSFetchedResultsController`.
+`CoreDataTableViewController` wrapper from [Stanford's CS193p](http://www.stanford.edu/class/cs193p/cgi-bin/drupal/downloads-2013-winter) is so great at it, that I've written it in Swift and made `CoreDataCollectionViewController` too in the same fashion.  
 
 ## Features
 - Core Data driven **UITableViewController** (UI automatically reflects data in Core Data model)
@@ -79,11 +82,7 @@ class MyTableViewController: CoreDataTableViewController {
 ```
 
 ### CoreDataCollectionViewController
-Same as with the tableView.
-
-## Requirements
-- Xcode 8.0+
-- iOS 8.0+
+Same as with the `CoreDataTableViewController `, just with `CoreDataCollectionViewController `.
 
 ## Installation
 
@@ -99,7 +98,7 @@ Same as with the tableView.
     github "tadija/AECoreDataUI"
     ```
 
-- Using [CocoaPods](http://cocoapods.org/):
+- [CocoaPods](http://cocoapods.org/):
 
     ```ruby
     pod 'AECoreDataUI'
