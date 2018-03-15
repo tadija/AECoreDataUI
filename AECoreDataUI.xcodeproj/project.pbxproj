@@ -59,9 +59,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B6D994D205B0E580079EB3A /* AECoreDataUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8BFD96F11CF073F8008E8C9E /* AECoreDataUITests.swift */,
+			);
+			path = AECoreDataUITests;
+			sourceTree = "<group>";
+		};
 		8BFD96D81CF073F8008E8C9E = {
 			isa = PBXGroup;
 			children = (
+				8BFD97051CF074DB008E8C9E /* Package.swift */,
 				8BFD96E41CF073F8008E8C9E /* Sources */,
 				8BFD96F01CF073F8008E8C9E /* Tests */,
 				8BFD96E31CF073F8008E8C9E /* Products */,
@@ -91,7 +100,7 @@
 		8BFD96F01CF073F8008E8C9E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				8BFD96F11CF073F8008E8C9E /* AECoreDataUITests.swift */,
+				8B6D994D205B0E580079EB3A /* AECoreDataUITests */,
 				8BFD96FF1CF0745D008E8C9E /* Supporting Files */,
 			);
 			path = Tests;
@@ -121,7 +130,6 @@
 				8BFD97031CF074B4008E8C9E /* README.md */,
 				8BFD97011CF074B4008E8C9E /* CHANGELOG.md */,
 				8BFD97001CF074B4008E8C9E /* AECoreDataUI.podspec */,
-				8BFD97051CF074DB008E8C9E /* Package.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
