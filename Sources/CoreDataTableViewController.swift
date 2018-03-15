@@ -4,8 +4,8 @@
  *  Licensed under the MIT license. See LICENSE file.
  */
 
-import CoreData
 import UIKit
+import CoreData
 
 /**
     Swift version of class originaly created for **Stanford CS193p Winter 2013**.
@@ -73,8 +73,8 @@ open class CoreDataTableViewController: UITableViewController, NSFetchedResultsC
         }
     }
     
-    fileprivate var _suspendAutomaticTrackingOfChangesInManagedObjectContext: Bool = false
-    fileprivate var beganUpdates: Bool = false
+    private var _suspendAutomaticTrackingOfChangesInManagedObjectContext: Bool = false
+    private var beganUpdates: Bool = false
     
     // MARK: - API
     
@@ -87,12 +87,12 @@ open class CoreDataTableViewController: UITableViewController, NSFetchedResultsC
         This will also automatically be called if you change the `fetchedResultsController` property.
     */
     open func performFetch() throws {
-        guard let frc = fetchedResultsController else { return }
-        
+        guard let frc = fetchedResultsController else {
+            return
+        }
         defer {
             tableView.reloadData()
         }
-        
         do {
             try frc.performFetch()
         } catch {
@@ -176,26 +176,22 @@ open class CoreDataTableViewController: UITableViewController, NSFetchedResultsC
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
         let superNumberOfSections = super.numberOfSections(in: tableView)
-        guard let frc = fetchedResultsController else { return superNumberOfSections }
-        return frc.sections?.count ?? superNumberOfSections
+        return fetchedResultsController?.sections?.count ?? superNumberOfSections
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let superNumberOfRows = super.tableView(tableView, numberOfRowsInSection: section)
-        guard let frc = fetchedResultsController else { return superNumberOfRows }
-        return (frc.sections?[section])?.numberOfObjects ?? superNumberOfRows
+        return (fetchedResultsController?.sections?[section])?.numberOfObjects ?? superNumberOfRows
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let superTitleForHeader = super.tableView(tableView, titleForHeaderInSection: section)
-        guard let frc = fetchedResultsController else { return superTitleForHeader }
-        return (frc.sections?[section])?.name ?? superTitleForHeader
+        return (fetchedResultsController?.sections?[section])?.name ?? superTitleForHeader
     }
     
     open override func tableView(_ tableView: UITableView,
                                  sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        guard let frc = fetchedResultsController else { return 0 }
-        return frc.section(forSectionIndexTitle: title, at: index)
+        return fetchedResultsController?.section(forSectionIndexTitle: title, at: index) ?? 0
     }
     
     open override func sectionIndexTitles(for tableView: UITableView) -> [String]? {

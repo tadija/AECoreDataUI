@@ -4,8 +4,8 @@
  *  Licensed under the MIT license. See LICENSE file.
  */
 
-import CoreData
 import UIKit
+import CoreData
 
 /**
     Same concept as `CoreDataTableViewController`, but modified for use with `UICollectionViewController`.
@@ -73,7 +73,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         }
     }
     
-    fileprivate var _suspendAutomaticTrackingOfChangesInManagedObjectContext: Bool = false
+    private var _suspendAutomaticTrackingOfChangesInManagedObjectContext: Bool = false
     
     // MARK: - API
     
@@ -86,12 +86,12 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
         This will also automatically be called if you change the `fetchedResultsController` property.
     */
     open func performFetch() throws {
-        guard let frc = fetchedResultsController else { return }
-        
+        guard let frc = fetchedResultsController else {
+            return
+        }
         defer {
             collectionView?.reloadData()
         }
-        
         do {
             try frc.performFetch()
         } catch {
@@ -221,8 +221,7 @@ open class CoreDataCollectionViewController: UICollectionViewController, NSFetch
 
     override open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let superNumberOfItems = super.collectionView(collectionView, numberOfItemsInSection: section)
-        guard let frc = fetchedResultsController else { return superNumberOfItems }
-        return (frc.sections?[section])?.numberOfObjects ?? superNumberOfItems
+        return (fetchedResultsController?.sections?[section])?.numberOfObjects ?? superNumberOfItems
     }
     
 }
