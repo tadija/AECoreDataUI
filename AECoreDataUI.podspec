@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name = 'AECoreDataUI'
-s.version = '4.1.0'
+s.version = '4.1.1'
 s.license = { :type => 'MIT', :file => 'LICENSE' }
 s.summary = 'Super awesome Core Data driven UI for iOS written in Swift'
 
