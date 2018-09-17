@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B250A701DA178CC007FA098 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B250A6F1DA178CC007FA098 /* CoreDataCollectionViewController.swift */; };
-		8BFD96E61CF073F8008E8C9E /* AECoreDataUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BFD96E51CF073F8008E8C9E /* AECoreDataUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B080D9421506B02009B8DBB /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B080D9221506B02009B8DBB /* CoreDataCollectionViewController.swift */; };
+		8B080D9521506B02009B8DBB /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B080D9321506B02009B8DBB /* CoreDataTableViewController.swift */; };
+		8B080D9A21506B13009B8DBB /* AECoreDataUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B080D9721506B0F009B8DBB /* AECoreDataUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BFD96ED1CF073F8008E8C9E /* AECoreDataUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BFD96E21CF073F8008E8C9E /* AECoreDataUI.framework */; };
 		8BFD96F21CF073F8008E8C9E /* AECoreDataUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFD96F11CF073F8008E8C9E /* AECoreDataUITests.swift */; };
-		8BFD96FD1CF07405008E8C9E /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFD96FC1CF07405008E8C9E /* CoreDataTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,14 +25,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B250A6F1DA178CC007FA098 /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; };
+		8B080D9221506B02009B8DBB /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; };
+		8B080D9321506B02009B8DBB /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
+		8B080D9721506B0F009B8DBB /* AECoreDataUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AECoreDataUI.h; sourceTree = "<group>"; };
+		8B080D9821506B0F009B8DBB /* AECoreDataUI.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AECoreDataUI.plist; sourceTree = "<group>"; };
+		8B080D9921506B0F009B8DBB /* AECoreDataUITests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AECoreDataUITests.plist; sourceTree = "<group>"; };
 		8BFD96E21CF073F8008E8C9E /* AECoreDataUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AECoreDataUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BFD96E51CF073F8008E8C9E /* AECoreDataUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AECoreDataUI.h; sourceTree = "<group>"; };
-		8BFD96E71CF073F8008E8C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BFD96EC1CF073F8008E8C9E /* AECoreDataUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AECoreDataUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFD96F11CF073F8008E8C9E /* AECoreDataUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AECoreDataUITests.swift; sourceTree = "<group>"; };
-		8BFD96F31CF073F8008E8C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8BFD96FC1CF07405008E8C9E /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		8BFD97001CF074B4008E8C9E /* AECoreDataUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AECoreDataUI.podspec; sourceTree = "<group>"; };
 		8BFD97011CF074B4008E8C9E /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		8BFD97021CF074B4008E8C9E /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -59,6 +59,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B080D9021506B02009B8DBB /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8B080D9121506B02009B8DBB /* AECoreDataUI */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		8B080D9121506B02009B8DBB /* AECoreDataUI */ = {
+			isa = PBXGroup;
+			children = (
+				8B080D9321506B02009B8DBB /* CoreDataTableViewController.swift */,
+				8B080D9221506B02009B8DBB /* CoreDataCollectionViewController.swift */,
+			);
+			path = AECoreDataUI;
+			sourceTree = "<group>";
+		};
+		8B080D9621506B0F009B8DBB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8B080D9721506B0F009B8DBB /* AECoreDataUI.h */,
+				8B080D9821506B0F009B8DBB /* AECoreDataUI.plist */,
+				8B080D9921506B0F009B8DBB /* AECoreDataUITests.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8B6D994D205B0E580079EB3A /* AECoreDataUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,7 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				8BFD97051CF074DB008E8C9E /* Package.swift */,
-				8BFD96E41CF073F8008E8C9E /* Sources */,
+				8B080D9621506B0F009B8DBB /* Resources */,
+				8B080D9021506B02009B8DBB /* Sources */,
 				8BFD96F01CF073F8008E8C9E /* Tests */,
 				8BFD96E31CF073F8008E8C9E /* Products */,
 				8BFD97041CF074BC008E8C9E /* Supporting Files */,
@@ -87,40 +115,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8BFD96E41CF073F8008E8C9E /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				8BFD96FC1CF07405008E8C9E /* CoreDataTableViewController.swift */,
-				8B250A6F1DA178CC007FA098 /* CoreDataCollectionViewController.swift */,
-				8BFD96FE1CF07455008E8C9E /* Supporting Files */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
 		8BFD96F01CF073F8008E8C9E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				8B6D994D205B0E580079EB3A /* AECoreDataUITests */,
-				8BFD96FF1CF0745D008E8C9E /* Supporting Files */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		8BFD96FE1CF07455008E8C9E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8BFD96E51CF073F8008E8C9E /* AECoreDataUI.h */,
-				8BFD96E71CF073F8008E8C9E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8BFD96FF1CF0745D008E8C9E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8BFD96F31CF073F8008E8C9E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8BFD97041CF074BC008E8C9E /* Supporting Files */ = {
@@ -141,7 +141,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BFD96E61CF073F8008E8C9E /* AECoreDataUI.h in Headers */,
+				8B080D9A21506B13009B8DBB /* AECoreDataUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,8 +244,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BFD96FD1CF07405008E8C9E /* CoreDataTableViewController.swift in Sources */,
-				8B250A701DA178CC007FA098 /* CoreDataCollectionViewController.swift in Sources */,
+				8B080D9521506B02009B8DBB /* CoreDataTableViewController.swift in Sources */,
+				8B080D9421506B02009B8DBB /* CoreDataCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +392,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Resources/AECoreDataUI.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AECoreDataUI;
@@ -412,7 +412,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Resources/AECoreDataUI.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AECoreDataUI;
@@ -424,7 +424,8 @@
 		8BFD96FA1CF073F8008E8C9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Resources/AECoreDataUITests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AECoreDataUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,7 +435,8 @@
 		8BFD96FB1CF073F8008E8C9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Resources/AECoreDataUITests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AECoreDataUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

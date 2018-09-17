@@ -6,7 +6,7 @@ s.license = { :type => 'MIT', :file => 'LICENSE' }
 s.summary = 'Super awesome Core Data driven UI for iOS written in Swift'
 
 s.source = { :git => 'https://github.com/tadija/AECoreDataUI.git', :tag => s.version }
-s.source_files = 'Sources/*.swift'
+s.source_files = 'Sources/AECoreDataUI/*.swift'
 
 s.swift_version = '4.2'
 
