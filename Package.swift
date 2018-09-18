@@ -10,6 +10,9 @@ import PackageDescription
 
 let package = Package(
     name: "AECoreDataUI",
+    products: [
+        .library(name: "AECoreDataUI", targets: ["AECoreDataUI"])
+    ],
     targets: [
         .target(
             name: "AECoreDataUI"
